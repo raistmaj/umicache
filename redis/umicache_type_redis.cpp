@@ -29,18 +29,21 @@
 #include "umicache_type_redis.hpp"
 #include <sstream>
 #include <cstring>
+#include <boost/lexical_cast.hpp>
 
 std::vector<uint8_t> umi::redis::RedisType::Serialize() const {
   return std::vector<uint8_t>();
 }
 
-umi::redis::RedisTypeSimpleString::RedisTypeSimpleString(const std::string &text)
+umi::redis::RedisTypeSimpleString::RedisTypeSimpleString(
+    const std::string &text)
     : simple_string(text) {}
 
 umi::redis::RedisTypeSimpleString::~RedisTypeSimpleString() {}
 
 std::vector<uint8_t> umi::redis::RedisTypeSimpleString::Serialize() const {
-  std::vector<uint8_t> retval;retval.reserve(128);
+  std::vector<uint8_t> retval;
+  retval.reserve(128);
   retval.push_back(static_cast<uint8_t>('+'));
   retval.insert(retval.end(), simple_string.begin(), simple_string.end());
   retval.push_back(static_cast<uint8_t>('\r'));
@@ -54,7 +57,8 @@ umi::redis::RedisTypeError::RedisTypeError(const std::string &error)
 umi::redis::RedisTypeError::~RedisTypeError() {}
 
 std::vector<uint8_t> umi::redis::RedisTypeError::Serialize() const {
-  std::vector<uint8_t> retval;retval.reserve(128);
+  std::vector<uint8_t> retval;
+  retval.reserve(128);
   retval.push_back(static_cast<uint8_t>('-'));
   retval.insert(retval.end(), error_string.begin(), error_string.end());
   retval.push_back(static_cast<uint8_t>('\r'));
@@ -62,20 +66,19 @@ std::vector<uint8_t> umi::redis::RedisTypeError::Serialize() const {
   return retval;
 }
 
-umi::redis::RedisTypeInteger::RedisTypeInteger(int64_t valueI) {
-  std::stringstream value;
-  value << valueI;
-  integer = value.str();
+umi::redis::RedisTypeInteger::RedisTypeInteger(int64_t valueI) try
+    : integer(boost::lexical_cast<std::string>(valueI)) {
+} catch (boost::bad_lexical_cast &) {
 }
 
 umi::redis::RedisTypeInteger::RedisTypeInteger(const std::string &value)
-  : integer(value){
-}
+    : integer(value) {}
 
 umi::redis::RedisTypeInteger::~RedisTypeInteger() {}
 
 std::vector<uint8_t> umi::redis::RedisTypeInteger::Serialize() const {
-  std::vector<uint8_t> retval;retval.reserve(128);
+  std::vector<uint8_t> retval;
+  retval.reserve(128);
   retval.push_back(static_cast<uint8_t>(':'));
   retval.insert(retval.end(), integer.begin(), integer.end());
   retval.push_back(static_cast<uint8_t>('\r'));
@@ -95,25 +98,28 @@ umi::redis::RedisTypeBulkString::RedisTypeBulkString(
 umi::redis::RedisTypeBulkString::~RedisTypeBulkString() {}
 
 std::vector<uint8_t> umi::redis::RedisTypeBulkString::Serialize() const {
-  std::vector<uint8_t> retval;retval.reserve(bulk_string.size() + 64);
-  retval.push_back(static_cast<uint8_t>('$'));
-  if (isNull) {
-    retval.push_back('-');
-    retval.push_back('1');
-  } else {
-    {
-      std::stringstream value;
-      value << bulk_string.size();
-      std::string valueToInsert(value.str());
-
-      retval.insert(retval.end(), valueToInsert.begin(), valueToInsert.end());
+  std::vector<uint8_t> retval;
+  try {
+    retval.reserve(bulk_string.size() + 64);
+    retval.push_back(static_cast<uint8_t>('$'));
+    if (isNull) {
+      retval.push_back('-');
+      retval.push_back('1');
+    } else {
+      {
+        std::string valueToInsert(
+            boost::lexical_cast<std::string>(bulk_string.size()));
+        retval.insert(retval.end(), valueToInsert.begin(), valueToInsert.end());
+      }
+      retval.push_back(static_cast<uint8_t>('\r'));
+      retval.push_back(static_cast<uint8_t>('\n'));
+      retval.insert(retval.end(), bulk_string.begin(), bulk_string.end());
     }
     retval.push_back(static_cast<uint8_t>('\r'));
     retval.push_back(static_cast<uint8_t>('\n'));
-    retval.insert(retval.end(), bulk_string.begin(), bulk_string.end());
+  } catch (boost::bad_lexical_cast &) {
+    retval.clear();
   }
-  retval.push_back(static_cast<uint8_t>('\r'));
-  retval.push_back(static_cast<uint8_t>('\n'));
   return retval;
 }
 
@@ -122,20 +128,25 @@ umi::redis::RedisTypeArray::RedisTypeArray() {}
 umi::redis::RedisTypeArray::~RedisTypeArray() {}
 
 std::vector<uint8_t> umi::redis::RedisTypeArray::Serialize() const {
-  std::vector<uint8_t> retval;retval.reserve(1024);
-  retval.push_back(static_cast<uint8_t>('*'));
-  {
-    std::stringstream integer;
-    integer << redis_array.size();
-    std::string final_integer(integer.str());
-    retval.insert(retval.end(), final_integer.begin(), final_integer.end());
+  std::vector<uint8_t> retval;
+  try {
+    retval.reserve(1024);
+    retval.push_back(static_cast<uint8_t>('*'));
+    {
+      std::string final_integer(
+          boost::lexical_cast<std::string>(redis_array.size()));
+      retval.insert(retval.end(), final_integer.begin(), final_integer.end());
+    }
+    retval.push_back('\r');
+    retval.push_back('\n');
+    for (auto &&element : redis_array) {
+      std::vector<uint8_t> auxSerialization(element->Serialize());
+      std::string single(auxSerialization.begin(), auxSerialization.end());
+      retval.insert(retval.end(), single.begin(), single.end());
+    }
+  } catch (boost::bad_lexical_cast &ex) {
+    retval.clear();
   }
-  retval.push_back('\r');
-  retval.push_back('\n');
-  for (auto &&element : redis_array) {
-    std::vector<uint8_t> auxSerialization(element->Serialize());
-    std::string single(auxSerialization.begin(), auxSerialization.end());
-    retval.insert(retval.end(), single.begin(), single.end());
-  }
+
   return retval;
 }

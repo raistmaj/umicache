@@ -30,6 +30,15 @@ add_executable(umicache
 				redis/commands/umicache_command_cluster_countkeysinslot.cpp
 				redis/commands/umicache_command_cluster_delslots.cpp
 				redis/commands/umicache_command_cluster_failover.cpp
+				redis/commands/umicache_command_cluster_forget.cpp
+				redis/commands/umicache_command_cluster_getkeysinslot.cpp
+				redis/commands/umicache_command_cluster_info.cpp
+				redis/commands/umicache_command_cluster_keyslot.cpp
+				redis/commands/umicache_command_cluster_meet.cpp
+				redis/commands/umicache_command_cluster_nodes.cpp
+				redis/commands/umicache_command_cluster_replicate.cpp
+				redis/commands/umicache_command_cluster_reset.cpp
+				redis/commands/umicache_command_cluster_saveconfig.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
