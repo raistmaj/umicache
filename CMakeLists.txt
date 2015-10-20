@@ -39,6 +39,14 @@ add_executable(umicache
 				redis/commands/umicache_command_cluster_replicate.cpp
 				redis/commands/umicache_command_cluster_reset.cpp
 				redis/commands/umicache_command_cluster_saveconfig.cpp
+				redis/commands/umicache_command_cluster_setconfigepoch.cpp
+				redis/commands/umicache_command_cluster_setslot.cpp
+				redis/commands/umicache_command_cluster_slaves.cpp
+				redis/commands/umicache_command_cluster_slots.cpp
+				redis/commands/umicache_command_command.cpp
+				redis/commands/umicache_command_command_count.cpp
+				redis/commands/umicache_command_command_getkeys.cpp
+				redis/commands/umicache_command_command_info.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
