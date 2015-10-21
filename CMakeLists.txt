@@ -59,6 +59,15 @@ add_executable(umicache
 				redis/commands/umicache_command_del.cpp
 				redis/commands/umicache_command_discard.cpp
 				redis/commands/umicache_command_dump.cpp
+				redis/commands/umicache_command_echo.cpp
+				redis/commands/umicache_command_eval.cpp
+				redis/commands/umicache_command_evalsha.cpp
+				redis/commands/umicache_command_exec.cpp
+				redis/commands/umicache_command_exists.cpp
+				redis/commands/umicache_command_expire.cpp
+				redis/commands/umicache_command_expireat.cpp
+				redis/commands/umicache_command_flushall.cpp
+				redis/commands/umicache_command_flushdb.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
