@@ -47,6 +47,10 @@ add_executable(umicache
 				redis/commands/umicache_command_command_count.cpp
 				redis/commands/umicache_command_command_getkeys.cpp
 				redis/commands/umicache_command_command_info.cpp
+				redis/commands/umicache_command_config_get.cpp
+				redis/commands/umicache_command_config_rewrite.cpp
+				redis/commands/umicache_command_config_set.cpp
+				redis/commands/umicache_command_config_resetstat.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
