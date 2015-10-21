@@ -68,6 +68,12 @@ add_executable(umicache
 				redis/commands/umicache_command_expireat.cpp
 				redis/commands/umicache_command_flushall.cpp
 				redis/commands/umicache_command_flushdb.cpp
+				redis/commands/umicache_command_geoadd.cpp
+				redis/commands/umicache_command_geohash.cpp
+				redis/commands/umicache_command_geopos.cpp
+				redis/commands/umicache_command_geodist.cpp
+				redis/commands/umicache_command_georadius.cpp
+				redis/commands/umicache_command_georadiusbymember.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
