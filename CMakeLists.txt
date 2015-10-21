@@ -54,6 +54,11 @@ add_executable(umicache
 				redis/commands/umicache_command_dbsize.cpp
 				redis/commands/umicache_command_debug_object.cpp
 				redis/commands/umicache_command_debug_segfault.cpp
+				redis/commands/umicache_command_decr.cpp
+				redis/commands/umicache_command_decrby.cpp
+				redis/commands/umicache_command_del.cpp
+				redis/commands/umicache_command_discard.cpp
+				redis/commands/umicache_command_dump.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
