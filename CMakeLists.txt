@@ -74,6 +74,10 @@ add_executable(umicache
 				redis/commands/umicache_command_geodist.cpp
 				redis/commands/umicache_command_georadius.cpp
 				redis/commands/umicache_command_georadiusbymember.cpp
+				redis/commands/umicache_command_get.cpp
+				redis/commands/umicache_command_getbit.cpp
+				redis/commands/umicache_command_getrange.cpp
+				redis/commands/umicache_command_getset.cpp
 				main.cpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)

@@ -26,59 +26,19 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of Jose Gerardo Palma Duran.
 */
-#include "umicache_command_georadiusbymember.hpp"
+#include "umicache_command_get.hpp"
 #include "../umicache_type_redis.hpp"
-#include "../../umicache_exception.hpp"
-#include <boost/lexical_cast.hpp>
 
-static const char *const __g_command_geo_radiusbymember__[] = {"m", "km", "mi", "ft"};
+umi::redis::CommandGet::CommandGet(const std::string& key)
+    : umi::redis::CommandRedis("GET", {key}) {}
 
-umi::redis::CommandGeoRADIUSByMember::CommandGeoRADIUSByMember(
-    const std::string &key, const std::string &member, double radius,
-    CommandGeoRADIUSByMemberUnit unit, int coords, int count) try : umi
-  ::redis::CommandRedis("GEORADIUSBYMEMBER",
-                        {key, member, boost::lexical_cast<std::string>(radius),
-                         __g_command_geo_radiusbymember__[static_cast<int>(unit)]}) {
-    if (coords & WITHCOORD) {
-      m_parameters.push_back("WITHCOORD");
-    }
-    if (coords & WITHDIST) {
-      m_parameters.push_back("WITHDIST");
-    }
-    if (coords & WITHHASH) {
-      m_parameters.push_back("WITHHASH");
-    }
-    if (count >= 0) {
-      m_parameters.push_back("COUNT");
-      m_parameters.push_back(boost::lexical_cast<std::string>(count));
-    }
-  }
-catch (boost::bad_lexical_cast &) {
-}
+umi::redis::CommandGet::~CommandGet() {}
 
-umi::redis::CommandGeoRADIUSByMember::~CommandGeoRADIUSByMember() {}
-
-std::vector<uint8_t> umi::redis::CommandGeoRADIUSByMember::Serialize() const {
-  size_t i = 0;
+std::vector<uint8_t> umi::redis::CommandGet::Serialize() const {
   umi::redis::RedisTypeArray append_command;
   append_command.redis_array.push_back(
       std::make_unique<RedisTypeBulkString>(m_operation));
-  while (i < m_parameters.size()) {
-    if (m_parameters[i] != "COUNT") {
-      append_command.redis_array.push_back(
-          std::make_unique<RedisTypeBulkString>(m_parameters[i]));
-    } else {
-      append_command.redis_array.push_back(
-          std::make_unique<RedisTypeBulkString>(m_parameters[i]));
-      ++i;
-      break;
-    }
-    ++i;
-  }
-  // Count case
-  if (i < m_parameters.size()) {
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeInteger>(m_parameters[i]));
-  }
+  append_command.redis_array.push_back(
+      std::make_unique<RedisTypeBulkString>(m_parameters[0]));
   return append_command.Serialize();
 }
