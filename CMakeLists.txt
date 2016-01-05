@@ -114,7 +114,7 @@ add_executable(umicache
 				redis/commands/umicache_command_incrbyfloat.cpp
 				redis/commands/umicache_command_incrbyfloat.hpp
 				redis/commands/umicache_command_info.cpp
-				redis/commands/umicache_command_info.hpp)
+				redis/commands/umicache_command_info.hpp redis/commands/umicache_command_keys.cpp redis/commands/umicache_command_keys.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
