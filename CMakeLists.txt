@@ -116,7 +116,9 @@ add_executable(umicache
 				redis/commands/umicache_command_info.cpp
 				redis/commands/umicache_command_info.hpp
 				redis/commands/umicache_command_keys.cpp
-				redis/commands/umicache_command_keys.hpp)
+				redis/commands/umicache_command_keys.hpp
+				redis/commands/umicache_command_lastsave.cpp
+				redis/commands/umicache_command_lastsave.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
