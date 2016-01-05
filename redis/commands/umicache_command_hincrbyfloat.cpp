@@ -26,35 +26,25 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of Jose Gerardo Palma Duran.
 */
-#ifndef UMI_CACHE_COMMAND_REDIS_GETSET_H
-#define UMI_CACHE_COMMAND_REDIS_GETSET_H
+#include "umicache_command_hincrbyfloat.hpp"
+#include "../umicache_type_redis.hpp"
+#include <boost/lexical_cast.hpp>
 
-#include "../umicache_command_redis.hpp"
+umi::redis::CommandHIncrByFloat::CommandHIncrByFloat(const std::string &key, const std::string &field, float increment) try
+  : umi::redis::CommandRedis("HINCRBYFLOAT", {key, field, boost::lexical_cast<std::string>(increment)}) { }
+catch (boost::bad_lexical_cast &ex) { }
 
-namespace umi {
-namespace redis {
+umi::redis::CommandHIncrByFloat::~CommandHIncrByFloat() { }
 
-/**
- * Basic command to get set a key value pair
- */
-class CommandGetSet : public umi::redis::CommandRedis {
-public:
-  /**
-   * Constructor of the command
-   */
-  CommandGetSet(const std::string& key, const std::string& value);
-  /**
-   * Release the resources used by the command
-   */
-  ~CommandGetSet();
-  /**
-   * Serializes the command into a vector
-   * @return A vector of bytes with the full serialized command
-   * prepared to be sent by the network
-   */
-  std::vector<uint8_t> Serialize() const;
-};
+std::vector<uint8_t> umi::redis::CommandHIncrByFloat::Serialize() const {
+  umi::redis::RedisTypeArray append_command;
+  append_command.redis_array.push_back(
+    std::make_unique<RedisTypeBulkString>(m_operation));
+  append_command.redis_array.push_back(
+    std::make_unique<RedisTypeBulkString>(m_parameters[0]));
+  append_command.redis_array.push_back(
+    std::make_unique<RedisTypeBulkString>(m_parameters[1]));
+  append_command.redis_array.push_back(
+    std::make_unique<RedisTypeSimpleString>(m_parameters[2]));
+  return append_command.Serialize();
 }
-}
-
-#endif

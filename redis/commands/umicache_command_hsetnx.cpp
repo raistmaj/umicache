@@ -26,35 +26,22 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of Jose Gerardo Palma Duran.
 */
-#ifndef UMI_CACHE_COMMAND_REDIS_GETSET_H
-#define UMI_CACHE_COMMAND_REDIS_GETSET_H
+#include "umicache_command_hsetnx.hpp"
+#include "../umicache_type_redis.hpp"
 
-#include "../umicache_command_redis.hpp"
-
-namespace umi {
-namespace redis {
-
-/**
- * Basic command to get set a key value pair
- */
-class CommandGetSet : public umi::redis::CommandRedis {
-public:
-  /**
-   * Constructor of the command
-   */
-  CommandGetSet(const std::string& key, const std::string& value);
-  /**
-   * Release the resources used by the command
-   */
-  ~CommandGetSet();
-  /**
-   * Serializes the command into a vector
-   * @return A vector of bytes with the full serialized command
-   * prepared to be sent by the network
-   */
-  std::vector<uint8_t> Serialize() const;
-};
-}
+umi::redis::CommandHSetNX::CommandHSetNX(const std::string &key, const std::string &fields, const std::string &value)
+  : umi::redis::CommandRedis("HSETNX", {key, fields, value}) {
 }
 
-#endif
+umi::redis::CommandHSetNX::~CommandHSetNX() { }
+
+std::vector<uint8_t> umi::redis::CommandHSetNX::Serialize() const {
+  umi::redis::RedisTypeArray append_command;
+  append_command.redis_array.push_back(
+    std::make_unique<RedisTypeBulkString>(m_operation));
+  for (auto &&i : m_parameters) {
+    append_command.redis_array.push_back(
+      std::make_unique<RedisTypeBulkString>(i));
+  }
+  return append_command.Serialize();
+}

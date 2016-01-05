@@ -78,7 +78,35 @@ add_executable(umicache
 				redis/commands/umicache_command_getbit.cpp
 				redis/commands/umicache_command_getrange.cpp
 				redis/commands/umicache_command_getset.cpp
-				main.cpp)
+				main.cpp
+				redis/commands/umicache_command_hdel.cpp
+				redis/commands/umicache_command_hdel.hpp
+				redis/commands/umicache_command_hexists.cpp
+				redis/commands/umicache_command_hexists.hpp
+				redis/commands/umicache_command_hget.cpp
+				redis/commands/umicache_command_hget.hpp
+				redis/commands/umicache_command_hgetall.cpp
+				redis/commands/umicache_command_hgetall.hpp
+				redis/commands/umicache_command_hincrby.cpp
+				redis/commands/umicache_command_hincrby.hpp
+				redis/commands/umicache_command_hincrbyfloat.cpp
+				redis/commands/umicache_command_hincrbyfloat.hpp
+				redis/commands/umicache_command_hkeys.cpp
+				redis/commands/umicache_command_hkeys.hpp
+				redis/commands/umicache_command_hlen.cpp
+				redis/commands/umicache_command_hlen.hpp
+				redis/commands/umicache_command_hmget.cpp
+				redis/commands/umicache_command_hmget.hpp
+				redis/commands/umicache_command_hmset.cpp
+				redis/commands/umicache_command_hmset.hpp
+				redis/commands/umicache_command_hset.cpp
+				redis/commands/umicache_command_hset.hpp
+				redis/commands/umicache_command_hsetnx.cpp
+				redis/commands/umicache_command_hsetnx.hpp
+				redis/commands/umicache_command_hstrlen.cpp
+				redis/commands/umicache_command_hstrlen.hpp
+				redis/commands/umicache_command_hvals.cpp
+				redis/commands/umicache_command_hvals.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)

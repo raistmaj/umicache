@@ -26,35 +26,34 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of Jose Gerardo Palma Duran.
 */
-#ifndef UMI_CACHE_COMMAND_REDIS_GETSET_H
-#define UMI_CACHE_COMMAND_REDIS_GETSET_H
+#ifndef UMICACHE_UMICACHE_COMMAND_HKEYS_HPP
+#define UMICACHE_UMICACHE_COMMAND_HKEYS_HPP
 
 #include "../umicache_command_redis.hpp"
 
 namespace umi {
-namespace redis {
-
-/**
- * Basic command to get set a key value pair
- */
-class CommandGetSet : public umi::redis::CommandRedis {
-public:
-  /**
-   * Constructor of the command
-   */
-  CommandGetSet(const std::string& key, const std::string& value);
-  /**
-   * Release the resources used by the command
-   */
-  ~CommandGetSet();
-  /**
-   * Serializes the command into a vector
-   * @return A vector of bytes with the full serialized command
-   * prepared to be sent by the network
-   */
-  std::vector<uint8_t> Serialize() const;
-};
+  namespace redis {
+    /**
+     * Basic command to get set a key value pair
+     */
+    class CommandHKeys : public umi::redis::CommandRedis {
+    public:
+      /**
+       * Constructor of the command
+       */
+      CommandHKeys(const std::string& key);
+      /**
+       * Release the resources used by the command
+       */
+      ~CommandHKeys();
+      /**
+       * Serializes the command into a vector
+       * @return A vector of bytes with the full serialized command
+       * prepared to be sent by the network
+       */
+      std::vector<uint8_t> Serialize() const;
+    };
+  }
 }
-}
 
-#endif
+#endif //UMICACHE_UMICACHE_COMMAND_HKEYS_HPP
