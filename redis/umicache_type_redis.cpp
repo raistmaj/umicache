@@ -83,6 +83,7 @@ std::vector<uint8_t> umi::redis::RedisTypeInteger::Serialize() const {
   retval.insert(retval.end(), integer.begin(), integer.end());
   retval.push_back(static_cast<uint8_t>('\r'));
   retval.push_back(static_cast<uint8_t>('\n'));
+  return retval;
 }
 
 umi::redis::RedisTypeBulkString::RedisTypeBulkString(const std::string &data)

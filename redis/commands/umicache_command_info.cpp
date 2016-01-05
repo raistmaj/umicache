@@ -30,7 +30,10 @@
 #include "../umicache_type_redis.hpp"
 
 umi::redis::CommandInfo::CommandInfo(const std::vector<std::string> &key)
-  : umi::redis::CommandRedis("INCR", {key}) {
+  : umi::redis::CommandRedis("INCR", {}) {
+  if (!key.empty()) {
+    m_parameters.insert(m_parameters.end(), key.begin(), key.end());
+  }
 }
 
 umi::redis::CommandInfo::~CommandInfo() { }
