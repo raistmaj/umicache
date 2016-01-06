@@ -122,7 +122,23 @@ add_executable(umicache
 				redis/commands/umicache_command_lindex.cpp
 				redis/commands/umicache_command_lindex.hpp
 				redis/commands/umicache_command_linsert.cpp
-				redis/commands/umicache_command_linsert.hpp redis/commands/umicache_command_llen.cpp redis/commands/umicache_command_llen.hpp redis/commands/umicache_command_lpop.cpp redis/commands/umicache_command_lpop.hpp redis/commands/umicache_command_lpush.cpp redis/commands/umicache_command_lpush.hpp)
+				redis/commands/umicache_command_linsert.hpp
+				redis/commands/umicache_command_llen.cpp
+				redis/commands/umicache_command_llen.hpp
+				redis/commands/umicache_command_lpop.cpp
+				redis/commands/umicache_command_lpop.hpp
+				redis/commands/umicache_command_lpush.cpp
+				redis/commands/umicache_command_lpush.hpp
+				redis/commands/umicache_command_lpushx.cpp
+				redis/commands/umicache_command_lpushx.hpp
+				redis/commands/umicache_command_lrange.cpp
+				redis/commands/umicache_command_lrange.hpp
+				redis/commands/umicache_command_lrem.cpp
+				redis/commands/umicache_command_lrem.hpp
+				redis/commands/umicache_command_lset.cpp
+				redis/commands/umicache_command_lset.hpp
+				redis/commands/umicache_command_ltrim.cpp
+				redis/commands/umicache_command_ltrim.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
