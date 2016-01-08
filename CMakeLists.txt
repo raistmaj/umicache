@@ -188,7 +188,23 @@ add_executable(umicache
         redis/commands/umicache_command_readonly.cpp
         redis/commands/umicache_command_readonly.hpp
         redis/commands/umicache_command_readwrite.cpp
-        redis/commands/umicache_command_readwrite.hpp)
+        redis/commands/umicache_command_readwrite.hpp
+        redis/commands/umicache_command_rename.cpp
+        redis/commands/umicache_command_rename.hpp
+        redis/commands/umicache_command_renamex.cpp
+        redis/commands/umicache_command_renamex.hpp
+        redis/commands/umicache_command_restore.cpp
+        redis/commands/umicache_command_restore.hpp
+        redis/commands/umicache_command_role.cpp
+        redis/commands/umicache_command_role.hpp
+        redis/commands/umicache_command_rpop.cpp
+        redis/commands/umicache_command_rpop.hpp
+        redis/commands/umicache_command_rpoplpush.cpp
+        redis/commands/umicache_command_rpoplpush.hpp
+        redis/commands/umicache_command_rpush.cpp
+        redis/commands/umicache_command_rpush.hpp
+        redis/commands/umicache_command_rpushx.cpp
+        redis/commands/umicache_command_rpushx.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
