@@ -180,7 +180,15 @@ add_executable(umicache
         redis/commands/umicache_command_publish.cpp
         redis/commands/umicache_command_publish.hpp
         redis/commands/umicache_command_punsubscribe.cpp
-        redis/commands/umicache_command_punsubscribe.hpp)
+        redis/commands/umicache_command_punsubscribe.hpp
+        redis/commands/umicache_command_quit.cpp
+        redis/commands/umicache_command_quit.hpp
+        redis/commands/umicache_command_randomkey.cpp
+        redis/commands/umicache_command_randomkey.hpp
+        redis/commands/umicache_command_readonly.cpp
+        redis/commands/umicache_command_readonly.hpp
+        redis/commands/umicache_command_readwrite.cpp
+        redis/commands/umicache_command_readwrite.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
