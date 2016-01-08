@@ -166,7 +166,21 @@ add_executable(umicache
         redis/commands/umicache_command_pfcount.cpp
         redis/commands/umicache_command_pfcount.hpp
         redis/commands/umicache_command_pfmerge.cpp
-        redis/commands/umicache_command_pfmerge.hpp)
+        redis/commands/umicache_command_pfmerge.hpp
+        redis/commands/umicache_command_ping.cpp
+        redis/commands/umicache_command_ping.hpp
+        redis/commands/umicache_command_psetex.cpp
+        redis/commands/umicache_command_psetex.hpp
+        redis/commands/umicache_command_psubscribe.cpp
+        redis/commands/umicache_command_psubscribe.hpp
+        redis/commands/umicache_command_pubsub.cpp
+        redis/commands/umicache_command_pubsub.hpp
+        redis/commands/umicache_command_pttl.cpp
+        redis/commands/umicache_command_pttl.hpp
+        redis/commands/umicache_command_publish.cpp
+        redis/commands/umicache_command_publish.hpp
+        redis/commands/umicache_command_punsubscribe.cpp
+        redis/commands/umicache_command_punsubscribe.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
