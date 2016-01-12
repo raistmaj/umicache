@@ -30,7 +30,7 @@
 #include "../umicache_type_redis.hpp"
 
 umi::redis::CommandScriptExists::CommandScriptExists(const std::vector<std::string> &key)
-        : umi::redis::CommandRedis("SCRIPT EXISTS", {}) {
+        : umi::redis::CommandRedis("SCRIPT", {"EXISTS"}) {
     m_parameters.insert(m_parameters.end(), key.begin(), key.end());
 }
 

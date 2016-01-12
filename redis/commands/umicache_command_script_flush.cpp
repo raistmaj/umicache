@@ -30,7 +30,7 @@
 #include "../umicache_type_redis.hpp"
 
 umi::redis::CommandScriptFlush::CommandScriptFlush()
-        : umi::redis::CommandRedis("SCRIPT FLUSH", {}) {
+        : umi::redis::CommandRedis("SCRIPT", {"FLUSH"}) {
 }
 
 umi::redis::CommandScriptFlush::~CommandScriptFlush() { }
@@ -39,5 +39,7 @@ std::vector<uint8_t> umi::redis::CommandScriptFlush::Serialize() const {
     umi::redis::RedisTypeArray append_command;
     append_command.redis_array.push_back(
             std::make_unique<RedisTypeBulkString>(m_operation));
+    append_command.redis_array.push_back(
+            std::make_unique<RedisTypeBulkString>(m_parameters[0]));
     return append_command.Serialize();
 }

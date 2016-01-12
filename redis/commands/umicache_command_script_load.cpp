@@ -30,7 +30,7 @@
 #include "../umicache_type_redis.hpp"
 
 umi::redis::CommandScriptLoad::CommandScriptLoad(const std::string &script)
-        : umi::redis::CommandRedis("SCRIPT LOAD", {script}) {
+        : umi::redis::CommandRedis("SCRIPT", {"LOAD", script}) {
 }
 
 umi::redis::CommandScriptLoad::~CommandScriptLoad() { }

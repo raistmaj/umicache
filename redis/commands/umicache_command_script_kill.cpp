@@ -30,7 +30,7 @@
 #include "../umicache_type_redis.hpp"
 
 umi::redis::CommandScriptKill::CommandScriptKill()
-        : umi::redis::CommandRedis("SCRIPT KILL", {}) {
+        : umi::redis::CommandRedis("SCRIPT", {"KILL"}) {
 }
 
 umi::redis::CommandScriptKill::~CommandScriptKill() { }
@@ -39,5 +39,7 @@ std::vector<uint8_t> umi::redis::CommandScriptKill::Serialize() const {
     umi::redis::RedisTypeArray append_command;
     append_command.redis_array.push_back(
             std::make_unique<RedisTypeBulkString>(m_operation));
+    append_command.redis_array.push_back(
+            std::make_unique<RedisTypeBulkString>(m_parameters[0]));
     return append_command.Serialize();
 }
