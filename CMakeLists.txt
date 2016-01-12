@@ -204,7 +204,7 @@ add_executable(umicache
         redis/commands/umicache_command_rpush.cpp
         redis/commands/umicache_command_rpush.hpp
         redis/commands/umicache_command_rpushx.cpp
-        redis/commands/umicache_command_rpushx.hpp)
+        redis/commands/umicache_command_rpushx.hpp redis/commands/umicache_command_sadd.cpp redis/commands/umicache_command_sadd.hpp redis/commands/umicache_command_save.cpp redis/commands/umicache_command_save.hpp redis/commands/umicache_command_scard.cpp redis/commands/umicache_command_scard.hpp redis/commands/umicache_command_script_exists.cpp redis/commands/umicache_command_script_exists.h redis/commands/umicache_command_script_flush.cpp redis/commands/umicache_command_script_flush.hpp redis/commands/umicache_command_script_kill.cpp redis/commands/umicache_command_script_kill.hpp redis/commands/umicache_command_script_load.cpp redis/commands/umicache_command_script_load.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
