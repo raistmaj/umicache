@@ -236,7 +236,7 @@ add_executable(umicache
         redis/commands/umicache_command_setrange.cpp
         redis/commands/umicache_command_setrange.hpp
         redis/commands/umicache_command_shutdown.cpp
-        redis/commands/umicache_command_shutdown.hpp)
+        redis/commands/umicache_command_shutdown.hpp redis/commands/umicache_command_sinter.cpp redis/commands/umicache_command_sinter.hpp redis/commands/umicache_command_sinterstore.cpp redis/commands/umicache_command_sinterstore.hpp redis/commands/umicache_command_sismember.cpp redis/commands/umicache_command_sismember.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
