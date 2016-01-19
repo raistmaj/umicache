@@ -26,30 +26,36 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of José Gerardo Palma Durán.
 */
-#include "umicache_command_spop.hpp"
-#include "../umicache_type_redis.hpp"
-#include <boost/lexical_cast.hpp>
+#ifndef UMICACHE_UMICACHE_COMMAND_SREM_HPP
+#define UMICACHE_UMICACHE_COMMAND_SREM_HPP
 
-umi::redis::CommandSPop::CommandSPop(const std::string &key, int count)
-    : umi::redis::CommandRedis("SPOP", {key}) {
-  try {
-    if (count > 0) {
-      m_parameters.push_back(boost::lexical_cast<std::string>(count));
-    }
-  } catch (boost::bad_lexical_cast &ex) { }
-}
+#include "../umicache_command_redis.hpp"
 
-umi::redis::CommandSPop::~CommandSPop() { }
+namespace umi {
+  namespace redis {
+    /**
+     * Basic command to get set a key value pair
+     */
+    class CommandSRem : public umi::redis::CommandRedis {
+    public:
+      /**
+       * Constructor of the command
+       */
+      CommandSRem(const std::string &key, std::vector<std::string> &member);
 
-std::vector<uint8_t> umi::redis::CommandSPop::Serialize() const {
-  umi::redis::RedisTypeArray append_command;
-  append_command.redis_array.push_back(
-      std::make_unique<RedisTypeBulkString>(m_operation));
-  append_command.redis_array.push_back(
-      std::make_unique<RedisTypeBulkString>(m_parameters[0]));
-  if (m_parameters.size() == 2) {
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeInteger>(m_parameters[1]));
+      /**
+       * Release the resources used by the command
+       */
+      ~CommandSRem();
+
+      /**
+       * Serializes the command into a vector
+       * @return A vector of bytes with the full serialized command
+       * prepared to be sent by the network
+       */
+      std::vector<uint8_t> Serialize() const;
+    };
   }
-  return append_command.Serialize();
 }
+
+#endif //UMICACHE_UMICACHE_COMMAND_SREM_HPP

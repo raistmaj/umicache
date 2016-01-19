@@ -236,7 +236,43 @@ add_executable(umicache
         redis/commands/umicache_command_setrange.cpp
         redis/commands/umicache_command_setrange.hpp
         redis/commands/umicache_command_shutdown.cpp
-        redis/commands/umicache_command_shutdown.hpp redis/commands/umicache_command_sinter.cpp redis/commands/umicache_command_sinter.hpp redis/commands/umicache_command_sinterstore.cpp redis/commands/umicache_command_sinterstore.hpp redis/commands/umicache_command_sismember.cpp redis/commands/umicache_command_sismember.hpp redis/commands/umicache_command_slaveof.cpp redis/commands/umicache_command_slaveof.hpp redis/commands/umicache_command_slowlog.cpp redis/commands/umicache_command_slowlog.hpp redis/commands/umicache_command_smembers.cpp redis/commands/umicache_command_smembers.hpp redis/commands/umicache_command_smove.cpp redis/commands/umicache_command_smove.hpp redis/commands/umicache_command_sort.cpp redis/commands/umicache_command_sort.hpp redis/commands/umicache_command_spop.cpp redis/commands/umicache_command_spop.hpp)
+        redis/commands/umicache_command_shutdown.hpp
+        redis/commands/umicache_command_sinter.cpp
+        redis/commands/umicache_command_sinter.hpp
+        redis/commands/umicache_command_sinterstore.cpp
+        redis/commands/umicache_command_sinterstore.hpp
+        redis/commands/umicache_command_sismember.cpp
+        redis/commands/umicache_command_sismember.hpp
+        redis/commands/umicache_command_slaveof.cpp
+        redis/commands/umicache_command_slaveof.hpp
+        redis/commands/umicache_command_slowlog.cpp
+        redis/commands/umicache_command_slowlog.hpp
+        redis/commands/umicache_command_smembers.cpp
+        redis/commands/umicache_command_smembers.hpp
+        redis/commands/umicache_command_smove.cpp
+        redis/commands/umicache_command_smove.hpp
+        redis/commands/umicache_command_sort.cpp
+        redis/commands/umicache_command_sort.hpp
+        redis/commands/umicache_command_spop.cpp
+        redis/commands/umicache_command_spop.hpp
+        redis/commands/umicache_command_srandmember.cpp
+        redis/commands/umicache_command_srandmember.hpp
+        redis/commands/umicache_command_srem.cpp
+        redis/commands/umicache_command_srem.hpp
+        redis/commands/umicache_command_strlen.cpp
+        redis/commands/umicache_command_strlen.hpp
+        redis/commands/umicache_command_subscribe.cpp
+        redis/commands/umicache_command_subscribe.hpp
+        redis/commands/umicache_command_sunion.cpp
+        redis/commands/umicache_command_sunion.hpp
+        redis/commands/umicache_command_sunionstore.cpp
+        redis/commands/umicache_command_sunionstore.hpp
+        redis/commands/umicache_command_sync.cpp
+        redis/commands/umicache_command_sync.hpp
+        redis/commands/umicache_command_time.cpp
+        redis/commands/umicache_command_time.hpp
+        redis/commands/umicache_command_ttl.cpp
+        redis/commands/umicache_command_ttl.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)

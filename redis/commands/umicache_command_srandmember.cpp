@@ -26,12 +26,12 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of José Gerardo Palma Durán.
 */
-#include "umicache_command_spop.hpp"
+#include "umicache_command_srandmember.hpp"
 #include "../umicache_type_redis.hpp"
 #include <boost/lexical_cast.hpp>
 
-umi::redis::CommandSPop::CommandSPop(const std::string &key, int count)
-    : umi::redis::CommandRedis("SPOP", {key}) {
+umi::redis::CommandSRandMember::CommandSRandMember(const std::string &key, int count)
+    : umi::redis::CommandRedis("SRANDMEMBER", {key}) {
   try {
     if (count > 0) {
       m_parameters.push_back(boost::lexical_cast<std::string>(count));
@@ -39,9 +39,9 @@ umi::redis::CommandSPop::CommandSPop(const std::string &key, int count)
   } catch (boost::bad_lexical_cast &ex) { }
 }
 
-umi::redis::CommandSPop::~CommandSPop() { }
+umi::redis::CommandSRandMember::~CommandSRandMember() { }
 
-std::vector<uint8_t> umi::redis::CommandSPop::Serialize() const {
+std::vector<uint8_t> umi::redis::CommandSRandMember::Serialize() const {
   umi::redis::RedisTypeArray append_command;
   append_command.redis_array.push_back(
       std::make_unique<RedisTypeBulkString>(m_operation));
