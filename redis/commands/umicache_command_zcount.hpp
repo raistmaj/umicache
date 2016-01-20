@@ -41,7 +41,7 @@ namespace umi {
       /**
        * Constructor of the command
        */
-      CommandZCount(const std::string &key, int min, int max);
+      CommandZCount(const std::string &key, const std::string &min, const std::string &max);
 
       /**
        * Release the resources used by the command

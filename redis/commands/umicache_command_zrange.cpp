@@ -9,7 +9,7 @@
 
    2. Redistributions in binary form must reproduce the above copyright notice,
   this list of conditions and the following disclaimer in the documentation
-  and/or other materials p0rovided with the distribution.
+  and/or other materials provided with the distribution.
 
   THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ''AS IS'' AND ANY EXPRESS OR
   IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -26,16 +26,23 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of José Gerardo Palma Durán.
 */
-#include "umicache_command_zcount.hpp"
+#include "umicache_command_zrange.hpp"
 #include "../umicache_type_redis.hpp"
+#include <boost/lexical_cast.hpp>
 
-umi::redis::CommandZCount::CommandZCount(const std::string &key, const std::string &min, const std::string &max)
-    : umi::redis::CommandRedis("ZCOUNT", {key, min, max}) {
+umi::redis::CommandZRange::CommandZRange(const std::string &key, int min, int max, bool score) try
+    : umi::redis::CommandRedis("ZRANGE",
+                               {key, boost::lexical_cast<std::string>(min), boost::lexical_cast<std::string>(max)}) {
+  if (score) {
+    m_parameters.emplace_back("WITHSCORES");
+  }
+} catch (boost::bad_lexical_cast &ex) {
+  m_parameters.clear();
 }
 
-umi::redis::CommandZCount::~CommandZCount() { }
+umi::redis::CommandZRange::~CommandZRange() { }
 
-std::vector<uint8_t> umi::redis::CommandZCount::Serialize() const {
+std::vector<uint8_t> umi::redis::CommandZRange::Serialize() const {
   umi::redis::RedisTypeArray append_command;
   if (!m_parameters.empty()) {
     append_command.redis_array.push_back(
@@ -43,9 +50,13 @@ std::vector<uint8_t> umi::redis::CommandZCount::Serialize() const {
     append_command.redis_array.push_back(
         std::make_unique<RedisTypeBulkString>(m_parameters[0]));
     append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[1]));
+        std::make_unique<RedisTypeInteger>(m_parameters[1]));
     append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[2]));
+        std::make_unique<RedisTypeInteger>(m_parameters[2]));
+    if (m_parameters.size() == 4) {
+      append_command.redis_array.push_back(
+          std::make_unique<RedisTypeBulkString>(m_parameters[3]));
+    }
   }
   return append_command.Serialize();
 }

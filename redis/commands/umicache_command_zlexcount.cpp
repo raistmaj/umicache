@@ -9,7 +9,7 @@
 
    2. Redistributions in binary form must reproduce the above copyright notice,
   this list of conditions and the following disclaimer in the documentation
-  and/or other materials p0rovided with the distribution.
+  and/or other materials provided with the distribution.
 
   THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ''AS IS'' AND ANY EXPRESS OR
   IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -26,16 +26,17 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of José Gerardo Palma Durán.
 */
-#include "umicache_command_zcount.hpp"
+#include "umicache_command_zlexcount.hpp"
 #include "../umicache_type_redis.hpp"
+#include <boost/lexical_cast.hpp>
 
-umi::redis::CommandZCount::CommandZCount(const std::string &key, const std::string &min, const std::string &max)
-    : umi::redis::CommandRedis("ZCOUNT", {key, min, max}) {
+umi::redis::CommandZLexCount::CommandZLexCount(const std::string &key, const std::string &min, const std::string &max)
+    : umi::redis::CommandRedis("ZLEXCOUNT", {key, min, max}) {
 }
 
-umi::redis::CommandZCount::~CommandZCount() { }
+umi::redis::CommandZLexCount::~CommandZLexCount() { }
 
-std::vector<uint8_t> umi::redis::CommandZCount::Serialize() const {
+std::vector<uint8_t> umi::redis::CommandZLexCount::Serialize() const {
   umi::redis::RedisTypeArray append_command;
   if (!m_parameters.empty()) {
     append_command.redis_array.push_back(

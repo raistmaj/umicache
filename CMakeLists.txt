@@ -282,7 +282,21 @@ add_executable(umicache
         redis/commands/umicache_command_wait.cpp
         redis/commands/umicache_command_wait.hpp
         redis/commands/umicache_command_watch.cpp
-        redis/commands/umicache_command_watch.hpp redis/commands/umicache_command_zadd.cpp redis/commands/umicache_command_zadd.hpp redis/commands/umicache_command_zcard.cpp redis/commands/umicache_command_zcard.hpp redis/commands/umicache_command_zcount.cpp redis/commands/umicache_command_zcount.hpp redis/commands/umicache_command_zincrby.cpp redis/commands/umicache_command_zincrby.hpp)
+        redis/commands/umicache_command_watch.hpp
+        redis/commands/umicache_command_zadd.cpp
+        redis/commands/umicache_command_zadd.hpp
+        redis/commands/umicache_command_zcard.cpp
+        redis/commands/umicache_command_zcard.hpp
+        redis/commands/umicache_command_zcount.cpp
+        redis/commands/umicache_command_zcount.hpp
+        redis/commands/umicache_command_zincrby.cpp
+        redis/commands/umicache_command_zincrby.hpp
+        redis/commands/umicache_command_zinterstore.cpp
+        redis/commands/umicache_command_zinterstore.hpp
+        redis/commands/umicache_command_zlexcount.cpp
+        redis/commands/umicache_command_zlexcount.hpp
+        redis/commands/umicache_command_zrange.cpp
+        redis/commands/umicache_command_zrange.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)

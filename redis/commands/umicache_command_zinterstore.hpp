@@ -9,7 +9,7 @@
 
    2. Redistributions in binary form must reproduce the above copyright notice,
   this list of conditions and the following disclaimer in the documentation
-  and/or other materials p0rovided with the distribution.
+  and/or other materials provided with the distribution.
 
   THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ''AS IS'' AND ANY EXPRESS OR
   IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -26,26 +26,48 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of José Gerardo Palma Durán.
 */
-#include "umicache_command_zcount.hpp"
-#include "../umicache_type_redis.hpp"
+#ifndef UMICACHE_UMICACHE_COMMAND_ZINTERSTORE_HPP
+#define UMICACHE_UMICACHE_COMMAND_ZINTERSTORE_HPP
 
-umi::redis::CommandZCount::CommandZCount(const std::string &key, const std::string &min, const std::string &max)
-    : umi::redis::CommandRedis("ZCOUNT", {key, min, max}) {
-}
+#include "../umicache_command_redis.hpp"
 
-umi::redis::CommandZCount::~CommandZCount() { }
+namespace umi {
+  namespace redis {
+    /**
+     * Basic command to get set a key value pair
+     */
+    class CommandZInterStore : public umi::redis::CommandRedis {
+    public:
+      enum CommandZInterStoreAggregate {
+        NO_AGGREGATE,
+        SUM,
+        MIN,
+        MAX
+      };
+      /**
+       * Constructor of the command
+       */
+      CommandZInterStore(const std::string &destination, const std::vector<std::string> &keys,
+                         const std::vector<int> &weights,
+                         CommandZInterStoreAggregate agg = CommandZInterStoreAggregate::NO_AGGREGATE);
 
-std::vector<uint8_t> umi::redis::CommandZCount::Serialize() const {
-  umi::redis::RedisTypeArray append_command;
-  if (!m_parameters.empty()) {
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_operation));
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[0]));
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[1]));
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[2]));
+      /**
+       * Release the resources used by the command
+       */
+      ~CommandZInterStore();
+
+      /**
+       * Serializes the command into a vector
+       * @return A vector of bytes with the full serialized command
+       * prepared to be sent by the network
+       */
+      std::vector<uint8_t> Serialize() const;
+    private:
+      std::size_t m_numkeys = 0;
+      bool m_hasWeights = false;
+      bool m_hasAgg = false;
+    };
   }
-  return append_command.Serialize();
 }
+
+#endif //UMICACHE_UMICACHE_COMMAND_ZINTERSTORE_HPP

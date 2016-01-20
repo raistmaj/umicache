@@ -9,7 +9,7 @@
 
    2. Redistributions in binary form must reproduce the above copyright notice,
   this list of conditions and the following disclaimer in the documentation
-  and/or other materials p0rovided with the distribution.
+  and/or other materials provided with the distribution.
 
   THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ''AS IS'' AND ANY EXPRESS OR
   IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -26,26 +26,36 @@
   those of the authors and should not be interpreted as representing official
   policies, either expressed or implied, of José Gerardo Palma Durán.
 */
-#include "umicache_command_zcount.hpp"
-#include "../umicache_type_redis.hpp"
+#ifndef UMICACHE_UMICACHE_COMMAND_ZLEXCOUNT_HPP
+#define UMICACHE_UMICACHE_COMMAND_ZLEXCOUNT_HPP
 
-umi::redis::CommandZCount::CommandZCount(const std::string &key, const std::string &min, const std::string &max)
-    : umi::redis::CommandRedis("ZCOUNT", {key, min, max}) {
-}
+#include "../umicache_command_redis.hpp"
 
-umi::redis::CommandZCount::~CommandZCount() { }
+namespace umi {
+  namespace redis {
+    /**
+     * Basic command to get set a key value pair
+     */
+    class CommandZLexCount : public umi::redis::CommandRedis {
+    public:
+      /**
+       * Constructor of the command
+       */
+      CommandZLexCount(const std::string &key, const std::string &min, const std::string & max);
 
-std::vector<uint8_t> umi::redis::CommandZCount::Serialize() const {
-  umi::redis::RedisTypeArray append_command;
-  if (!m_parameters.empty()) {
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_operation));
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[0]));
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[1]));
-    append_command.redis_array.push_back(
-        std::make_unique<RedisTypeBulkString>(m_parameters[2]));
+      /**
+       * Release the resources used by the command
+       */
+      ~CommandZLexCount();
+
+      /**
+       * Serializes the command into a vector
+       * @return A vector of bytes with the full serialized command
+       * prepared to be sent by the network
+       */
+      std::vector<uint8_t> Serialize() const;
+    };
   }
-  return append_command.Serialize();
 }
+
+#endif //UMICACHE_UMICACHE_COMMAND_ZLEXCOUNT_HPP
