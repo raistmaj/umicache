@@ -272,7 +272,17 @@ add_executable(umicache
         redis/commands/umicache_command_time.cpp
         redis/commands/umicache_command_time.hpp
         redis/commands/umicache_command_ttl.cpp
-        redis/commands/umicache_command_ttl.hpp)
+        redis/commands/umicache_command_ttl.hpp
+        redis/commands/umicache_command_type.cpp
+        redis/commands/umicache_command_type.hpp
+        redis/commands/umicache_command_unsubscribe.cpp
+        redis/commands/umicache_command_unsubscribe.hpp
+        redis/commands/umicache_command_unwatch.cpp
+        redis/commands/umicache_command_unwatch.hpp
+        redis/commands/umicache_command_wait.cpp
+        redis/commands/umicache_command_wait.hpp
+        redis/commands/umicache_command_watch.cpp
+        redis/commands/umicache_command_watch.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
