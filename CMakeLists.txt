@@ -296,7 +296,7 @@ add_executable(umicache
         redis/commands/umicache_command_zlexcount.cpp
         redis/commands/umicache_command_zlexcount.hpp
         redis/commands/umicache_command_zrange.cpp
-        redis/commands/umicache_command_zrange.hpp)
+        redis/commands/umicache_command_zrange.hpp redis/commands/umicache_command_zrangebylex.cpp redis/commands/umicache_command_zrangebylex.hpp redis/commands/umicache_command_zrevrangebylex.cpp redis/commands/umicache_command_zrevrangebylex.hpp redis/commands/umicache_command_zrangebyscore.cpp redis/commands/umicache_command_zrangebyscore.hpp redis/commands/umicache_command_zrank.cpp redis/commands/umicache_command_zrank.hpp redis/commands/umicache_command_zrem.cpp redis/commands/umicache_command_zrem.hpp redis/commands/umicache_command_zremrangebylex.cpp redis/commands/umicache_command_zremrangebylex.hpp redis/commands/umicache_command_zremrangebyrank.cpp redis/commands/umicache_command_zremrangebyrank.hpp redis/commands/umicache_command_zremrangebyscore.cpp redis/commands/umicache_command_zremrangebyscore.hpp redis/commands/umicache_command_zrevrange.cpp redis/commands/umicache_command_zrevrange.hpp redis/commands/umicache_command_zrevrangebyscore.cpp redis/commands/umicache_command_zrevrangebyscore.hpp redis/commands/umicache_command_zrevrank.cpp redis/commands/umicache_command_zrevrank.hpp redis/commands/umicache_command_zscore.cpp redis/commands/umicache_command_zscore.hpp)
 
 set_property(TARGET umicache PROPERTY CXX_STANDARD 14)
 set_property(TARGET umicache PROPERTY CXX_STANDARD_REQUIRED ON)
